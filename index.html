@@ -1,281 +1,318 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Siddhi Gawali</title>
+<title>Siddhi Gawali | AI & Data Science</title>
+<meta name="description" content="Portfolio of Siddhi Gawali, final-year AI & Data Science student building LLMs, RAG systems and computer vision projects.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f4ff; --surface:#ffffff; --ink:#1c1840; --muted:#5d5a7d; --line:#dedcf2;
+  --accent:#5b3df5; --accent-soft:#e8e4ff; --pop:#ff5c8a; --pop-soft:#ffe3ec;
+  --display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --body:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#13112b; --surface:#1c1a3d; --ink:#f1efff; --muted:#aaa7cf; --line:#34305f;
+    --accent:#9a86ff; --accent-soft:#2b2660; --pop:#ff7fa3; --pop-soft:#4a2540;
+  }
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--pop);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:28px}
+section{padding:72px 0}
+
+/* nav */
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font:800 1.25rem var(--display);text-decoration:none}
+.logo b{color:var(--pop)}
+nav ul{display:flex;gap:22px;list-style:none;padding:0;font-weight:500;font-size:.95rem}
+nav ul a{text-decoration:none;color:var(--muted)}
+nav ul a:hover{color:var(--accent)}
+@media(max-width:700px){nav ul{display:none}}
+
+/* hero */
+.hero{padding:64px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,8vw,5.2rem);font-weight:800}
+.hero h1 span{display:block;color:var(--accent)}
+.hero p.lead{margin:22px 0 28px;max-width:34em;color:var(--muted);font-size:1.15rem}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--ink)}
+.btn.main{background:var(--ink);color:var(--bg)}
+.btn.main:hover{background:var(--accent);border-color:var(--accent)}
+.btn.alt:hover{background:var(--pop-soft)}
+.graph{width:100%;height:auto;max-width:420px;justify-self:center}
+.graph line{stroke:var(--line);stroke-width:2}
+.graph .core{fill:var(--accent)}
+.graph .node{fill:var(--surface);stroke:var(--accent);stroke-width:2}
+.graph .node.p{stroke:var(--pop)}
+.graph text{font:700 13px var(--display);fill:var(--ink);text-anchor:middle}
+.graph .core-t{fill:#fff;font-size:17px}
+.pulse{animation:pulse 3.2s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes pulse{50%{transform:scale(1.08)}}
+@media(prefers-reduced-motion:reduce){.pulse{animation:none}html{scroll-behavior:auto}}
+@media(max-width:800px){.hero .wrap{grid-template-columns:1fr}.graph{max-width:320px}}
+
+/* about */
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start}
+.about p+p{margin-top:16px}
+.facts{background:var(--accent-soft);border-radius:28px;padding:26px 28px;display:grid;gap:14px}
+.facts div{display:flex;justify-content:space-between;gap:16px;border-bottom:1px dashed var(--line);padding-bottom:10px}
+.facts div:last-child{border:0;padding:0}
+.facts dt{color:var(--muted)}
+.facts dd{font-weight:700;text-align:right}
+@media(max-width:800px){.about{grid-template-columns:1fr}}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.group{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.group h3{font-size:1.15rem;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}
+.chips li{background:var(--accent-soft);padding:4px 12px;border-radius:999px;font-size:.9rem;font-weight:500}
+.group:nth-child(even) .chips li{background:var(--pop-soft)}
+
+/* projects */
+.feature{background:var(--ink);color:var(--bg);border-radius:32px;padding:36px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-bottom:22px}
+.feature h3{font-size:clamp(1.6rem,3.5vw,2.2rem)}
+.badge{display:inline-block;background:var(--pop);color:#2a0a17;font-weight:700;font-size:.85rem;padding:4px 14px;border-radius:999px;margin-bottom:14px}
+.feature p{opacity:.88;margin-top:12px}
+.feature ul{padding-left:20px;display:grid;gap:10px;opacity:.92;align-self:center}
+@media(max-width:800px){.feature{grid-template-columns:1fr;padding:26px}}
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;border-top:5px solid var(--accent)}
+.card:nth-child(2){border-top-color:var(--pop)}
+.card h3{font-size:1.25rem;margin-bottom:6px}
+.card .tag{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+.card p{margin-bottom:14px}
+.card .stack{margin-top:auto;font-size:.9rem;color:var(--muted)}
+.card a.link{font-weight:700;color:var(--accent);margin-top:12px;display:inline-block}
+
+/* timeline */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media(max-width:800px){.cols{grid-template-columns:1fr}}
+.tl{border-left:3px solid var(--line);padding-left:24px;display:grid;gap:26px}
+.tl article{position:relative}
+.tl article::before{content:"";position:absolute;left:-33px;top:7px;width:13px;height:13px;border-radius:50%;background:var(--pop);border:3px solid var(--bg)}
+.tl h3{font-size:1.15rem}
+.tl .when{color:var(--muted);font-size:.9rem;margin:2px 0 6px}
+.tl ul{padding-left:18px;display:grid;gap:6px;font-size:1rem}
+
+/* wins */
+.wins{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;list-style:none;padding:0}
+.wins li{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px}
+.wins li:first-child{background:var(--pop-soft);border-color:transparent}
+.wins strong{display:block;font:700 1.1rem var(--display);margin-bottom:4px}
+.wins span{color:var(--muted);font-size:.95rem}
+
+/* contact */
+.contact{text-align:center;background:var(--accent);color:#fff;border-radius:36px;padding:56px 24px;margin-bottom:56px}
+.contact h2{margin-bottom:12px}
+.contact p{max-width:30em;margin:0 auto 26px;opacity:.92}
+.contact .btn{border-color:#fff;color:#fff;margin:4px}
+.contact .btn.main{background:#fff;color:#2a1a8f}
+.contact .btn.main:hover{background:var(--pop);color:#2a0a17;border-color:var(--pop)}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding-bottom:36px}
+</style>
 </head>
 <body>
-<header class="site">
+
+<nav>
   <div class="wrap">
-    <a class="brand" href="#top">Siddhi Gawali</a>
-    <nav aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <a class="logo" href="#top">Siddhi<b>.</b></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Siddhi <span>Gawali</span></h1>
+      <p class="lead">I teach machines to read, see and answer. Final-year AI &amp; Data Science student who likes turning messy data into models people can actually use.</p>
+      <div class="btns">
+        <a class="btn main" href="#projects">See my work</a>
+        <a class="btn alt" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <svg class="graph" viewBox="0 0 400 400" role="img" aria-label="Map connecting Siddhi to language models, retrieval, computer vision, MLOps and data analysis">
+      <g>
+        <line x1="200" y1="200" x2="200" y2="62"/><line x1="200" y1="200" x2="332" y2="156"/>
+        <line x1="200" y1="200" x2="282" y2="322"/><line x1="200" y1="200" x2="118" y2="322"/>
+        <line x1="200" y1="200" x2="68" y2="156"/>
+        <line x1="200" y1="62" x2="332" y2="156"/><line x1="118" y1="322" x2="282" y2="322"/><line x1="68" y1="156" x2="200" y2="62"/>
+      </g>
+      <circle class="core pulse" cx="200" cy="200" r="52"/>
+      <text class="core-t" x="200" y="206">Siddhi</text>
+      <circle class="node" cx="200" cy="62" r="40"/><text x="200" y="67">LLMs</text>
+      <circle class="node p" cx="332" cy="156" r="40"/><text x="332" y="161">RAG</text>
+      <circle class="node" cx="282" cy="322" r="40"/><text x="282" y="327">Vision</text>
+      <circle class="node p" cx="118" cy="322" r="40"/><text x="118" y="327">MLOps</text>
+      <circle class="node" cx="68" cy="156" r="40"/><text x="68" y="161">Data</text>
+    </svg>
   </div>
 </header>
 
-<main id="top">
-  <div class="wrap">
-    <section class="hero">
-      <div>
-        <p class="eyebrow">AI &amp; Data Science · B.Tech · 2024–2027</p>
-        <h1>Siddhi Gawali</h1>
-        <p class="lead">I build language models, vision systems and machine-learning pipelines. My team's from-scratch university LLM took 1st place at the Inter-Departmental LLM Model Competition 2026, and my crop-monitoring research is published at IEEE ICSCSA 2025.</p>
-        <div class="links">
-          <a href="https://github.com/SIDDHIGAWALI" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.linkedin.com/in/siddhi-gawali-38557b2b2/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://www.kaggle.com/siddhigawali" target="_blank" rel="noopener">Kaggle</a>
-          <a href="https://ieeexplore.ieee.org/document/11171172" target="_blank" rel="noopener">IEEE paper</a>
-        </div>
-      </div>
-      <figure class="portrait">
-        <img src="photo.jpg" alt="Portrait of Siddhi Gawali" width="240" height="320">
-        <figcaption>Kopargaon, India</figcaption>
-      </figure>
-    </section>
-
-    <div class="ruler" role="img" aria-label="Wavelength scale, 400 to 700 nanometres, from hyperspectral imaging work">
-      <div class="band"></div>
-      <div class="ticks"></div>
-      <div class="labels"><span>400 nm</span><span>550 nm · hyperspectral imaging</span><span>700 nm</span></div>
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h2>A bit about me</h2>
+      <p>I'm studying B.Tech in Artificial Intelligence &amp; Data Science at Sanjivani University, and most of my time goes into building things end to end: exploring the data, training the model, then wrapping it into something that runs.</p>
+      <p>My work ranges from a research paper on crop prediction to a small language model trained from scratch for my university. I'm now looking for an AI-focused software engineering internship where I can keep shipping practical, data-driven features.</p>
     </div>
-
     <dl class="facts">
-      <div><dt>Now</dt><dd>Trainee, Tech Mahindra Maker's Lab</dd></div>
-      <div><dt>Studying</dt><dd>Sanjivani University, CGPA 8.32</dd></div>
-      <div><dt>Leads</dt><dd>AI &amp; DS Student Association</dd></div>
-      <div><dt>Looking for</dt><dd>AI-Native Software Engineering Intern role</dd></div>
+      <div><dt>Based in</dt><dd>Kopargaon, India</dd></div>
+      <div><dt>Studying</dt><dd>B.Tech, AI &amp; DS</dd></div>
+      <div><dt>Graduating</dt><dd>2027</dd></div>
+      <div><dt>Published</dt><dd>IEEE ICSCSA 2025</dd></div>
+      <div><dt>Speaks</dt><dd>English, Marathi, Hindi, German</dd></div>
     </dl>
   </div>
+</section>
 
+<section id="skills">
   <div class="wrap">
-    <section class="sec" id="about">
-      <h2>About</h2>
-      <div class="body">
-        <p>Final-year B.Tech student in Artificial Intelligence &amp; Data Science with hands-on experience in Python, SQL, data analysis and machine learning. My work covers ensemble models on real-world datasets, PCA-based dimensionality reduction and classification, deep learning, LLMs and RAG pipelines.</p>
-        <p>I am looking for an AI-Native Software Engineering Intern role where I can apply predictive modeling and data-driven analysis to real-world problems.</p>
-      </div>
-    </section>
-
-    <section class="sec" id="projects">
-      <h2>Projects</h2>
-      <div class="body">
-
-        <article class="feature">
-          <span class="badge">1st Place · LLM Model Competition 2026</span>
-          <div class="item-head">
-            <h3>EduVerse-1 (SanjivaniLLM)</h3>
-            <span class="item-links"><a href="https://github.com/SIDDHIGAWALI/EduVerse-1-SanjivaniLLM-" target="_blank" rel="noopener">GitHub ↗</a></span>
-            <span class="meta">Institutional AI assistant for Sanjivani University · Team Co-Lead</span>
-          </div>
-          <ul class="bullets">
-            <li>Designed and trained a decoder-only Transformer from scratch with a custom BPE tokenizer, using AdamW and a cosine learning rate schedule.</li>
-            <li>Built a RAG pipeline over cleaned university data (web pages, syllabi, policy PDFs) with FAISS vector search, delivering source-cited answers on admissions, fees, exam rules and more.</li>
-            <li>Diagnosed overfitting and data-scale limits across training checkpoints, then built a cleaning pipeline that removed repeated navigation and footer text and corrupted files.</li>
-          </ul>
-          <dl class="spec">
-            <div><dt>Architecture</dt><dd>Decoder-only Transformer</dd></div>
-            <div><dt>Parameters</dt><dd>~23M</dd></div>
-            <div><dt>Layers</dt><dd>6</dd></div>
-            <div><dt>Attention heads</dt><dd>8</dd></div>
-            <div><dt>Hidden size</dt><dd>512</dd></div>
-            <div><dt>Tokenizer</dt><dd>Custom BPE</dd></div>
-            <div><dt>Retrieval</dt><dd>FAISS</dd></div>
-            <div><dt>Embeddings</dt><dd>all-MiniLM-L6-v2</dd></div>
-          </dl>
-          <p class="tech"><b>Tech</b> · Python, PyTorch, FAISS, Sentence Embeddings, BPE Tokenization</p>
-        </article>
-
-        <div>
-          <article class="item">
-            <div class="item-head">
-              <h3>Precision Agriculture Using Ensemble Machine Learning</h3>
-              <span class="item-links"><a href="https://github.com/SIDDHIGAWALI/Precision-Agriculture-Using-Machine-Learning-" target="_blank" rel="noopener">GitHub ↗</a></span>
-              <span class="meta">Published · IEEE ICSCSA 2025</span>
-            </div>
-            <ul class="bullets">
-              <li>Ran exploratory data analysis on soil and environmental datasets before preprocessing, then built an ensemble system using Random Forest and Extra Trees models.</li>
-              <li>Used feature analysis to identify key factors such as rainfall and humidity, reaching over 99% accuracy and AUC in predicting crop growth stages.</li>
-            </ul>
-            <p class="tech"><b>Tech</b> · Python, Scikit-learn, Pandas, NumPy</p>
-          </article>
-
-          <article class="item">
-            <div class="item-head">
-              <h3>Bladder Cancer Detection Using Hyperspectral Imaging</h3>
-              <span class="item-links"><a href="https://github.com/SIDDHIGAWALI/HSI-Bladder-Cancer-Classification-using-Transfer-Learning-ResNet50-" target="_blank" rel="noopener">GitHub ↗</a></span>
-              <span class="meta">Hyperspectral imaging &amp; transfer learning (ResNet50)</span>
-            </div>
-            <ul class="bullets">
-              <li>Ran EDA on hyperspectral data, then developed a machine learning diagnostic framework using PCA for dimensionality reduction, data augmentation for class balancing, and clustering.</li>
-              <li>Preprocessed the hyperspectral data and trained a ResNet model for early and accurate bladder cancer classification.</li>
-            </ul>
-          </article>
-
-          <article class="item">
-            <div class="item-head">
-              <h3>Real-Time Sign Language Detection and Translation</h3>
-              <span class="item-links"><a href="https://github.com/SIDDHIGAWALI/Real-Time-Sign-Language-Detection-Using-Deep-Learning" target="_blank" rel="noopener">GitHub ↗</a></span>
-              <span class="meta">Hybrid deep learning · computer vision</span>
-            </div>
-            <ul class="bullets">
-              <li>Built a real-time vision system combining CNNs for spatial features, GNNs for hand-joint relationships and Vision Transformers for global gesture patterns.</li>
-              <li>Captured live hand-gesture data, ran EDA, modeled skeletal relationships and translated recognized gestures into text to improve communication accessibility.</li>
-            </ul>
-          </article>
-
-          <article class="item">
-            <div class="item-head">
-              <h3>Synthetic QA Dataset Pipeline and LoRA Fine-Tuning on Indian Handicrafts</h3>
-              <span class="meta">Internship based</span>
-            </div>
-            <ul class="bullets">
-              <li>Built a pipeline to scrape handicraft content, explored it with EDA and generated synthetic question–answer pairs for supervised fine-tuning.</li>
-              <li>Fine-tuned Qwen2.5 with LoRA (SFT) and fixed hallucinated links in generated answers through data cleaning and output validation.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec" id="experience">
-      <h2>Experience</h2>
-      <div class="body">
-        <article class="item">
-          <div class="item-head">
-            <h3>Trainee, Tech Mahindra (Maker's Lab)</h3>
-            <span class="meta">June 2026 – October 2026</span>
-          </div>
-          <ul class="bullets">
-            <li>Gained hands-on exposure to Large Language Models (Project Indus) and Vision Language Models, working on Domain-Specific Language Models and Qwen models.</li>
-            <li>Fine-tuned Qwen models with supervised fine-tuning and parameter-efficient methods (LoRA, QLoRA).</li>
-            <li>Integrated a machine learning model into a mobile application for testing and compared Random Forest and Decision Tree performance statistics.</li>
-            <li>Tested mobile and web applications for live client projects, debugging issues and keeping software quality up.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="sec" id="skills">
-      <h2>Skills</h2>
-      <div class="body">
-        <dl class="rows">
-          <div class="row"><dt>Programming</dt><dd>Python, SQL, Java, JavaScript, Bash/Shell</dd></div>
-          <div class="row"><dt>Data analysis</dt><dd>Pandas, NumPy, Matplotlib, Seaborn, EDA, data cleaning and preprocessing, Power BI, Tableau, SPSS, IBM Cognos Analytics</dd></div>
-          <div class="row"><dt>Machine learning</dt><dd>Supervised and unsupervised learning, classification, clustering, ensemble methods (Random Forest, Extra Trees), PCA, feature analysis, Scikit-learn</dd></div>
-          <div class="row"><dt>Deep learning</dt><dd>PyTorch, TensorFlow, Keras, CNN, RNN, LSTM, ResNet, GNN, Vision Transformers, Transformers</dd></div>
-          <div class="row"><dt>Computer vision</dt><dd>OpenCV, YOLO, object detection, image classification, gesture recognition, hyperspectral imaging, model inference</dd></div>
-          <div class="row"><dt>Generative AI</dt><dd>LLMs, prompt engineering, embeddings, vector databases (FAISS), RAG, fine-tuning (LoRA)</dd></div>
-          <div class="row"><dt>Big data</dt><dd>Hadoop (basics), Apache Spark (basics), Databricks</dd></div>
-          <div class="row"><dt>Databases</dt><dd>MySQL, MongoDB</dd></div>
-          <div class="row"><dt>MLOps &amp; DevOps</dt><dd>Docker, Kubernetes, Jenkins, CI/CD, IBM Cloud</dd></div>
-          <div class="row"><dt>Methodologies</dt><dd>Agile (basics), Scrum, Kanban</dd></div>
-          <div class="row"><dt>Tools &amp; systems</dt><dd>Git, GitHub, Linux (command line), Jira, Windows, TCP/IP networking basics, HTML, CSS, PHP</dd></div>
-        </dl>
-      </div>
-    </section>
-
-    <section class="sec" id="education">
-      <h2>Education</h2>
-      <div class="body">
-        <div>
-          <div class="edu"><span class="what">B.Tech, Artificial Intelligence &amp; Data Science</span><span class="score">8.32 CGPA</span><span class="where">Sanjivani University, Kopargaon</span><span class="years">2024 – 2027</span></div>
-          <div class="edu"><span class="what">Diploma, Computer Technology</span><span class="score">87.89%</span><span class="where">Sanjivani K.B.P. Polytechnic, Kopargaon</span><span class="years">2022 – 2024</span></div>
-          <div class="edu"><span class="what">HSC, 12th Science</span><span class="score">79.67%</span><span class="where">Sanjivani Junior College, Kopargaon</span><span class="years">2020 – 2022</span></div>
-          <div class="edu"><span class="what">SSC, 10th (CBSE)</span><span class="score">82.2%</span><span class="where">Samata International School, Kopargaon</span><span class="years">2014 – 2020</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec" id="recognition">
-      <h2>Recognition</h2>
-      <div class="body">
-        <div class="two">
-          <div class="sub">
-            <h3>Publication</h3>
-            <p><a href="https://ieeexplore.ieee.org/document/11171172" target="_blank" rel="noopener">Intelligent Crop Monitoring: Machine Learning-Based Classification of Plant Growth Stages for Precision Agriculture</a></p>
-            <p class="meta">5th International Conference on Soft Computing for Security Applications (ICSCSA 2025)</p>
-          </div>
-          <div class="sub">
-            <h3>Achievements &amp; leadership</h3>
-            <ul class="bullets">
-              <li>1st Place, Inter-Departmental LLM Model Competition 2026, Sanjivani University (Team Lead, EduVerse-1)</li>
-              <li>President of the AI &amp; DS Student Association</li>
-              <li>Event team member, Developer Students Club (Google DSC)</li>
-              <li>Member of the IEEE Student Branch</li>
-            </ul>
-          </div>
-        </div>
-        <div class="two">
-          <div class="sub">
-            <h3>Certifications</h3>
-            <div>
-              <p class="cert"><b>Learning Analytical Tools</b><span>Oct 2025 · 12 weeks · analytical tools and quantitative techniques for structured problem-solving and data analysis</span></p>
-              <p class="cert"><b>IBM DevOps Fundamentals</b><span>Nov 2024 · CI/CD pipelines, containerization, automation with Ansible and Terraform, monitoring, DevSecOps on IBM Cloud</span></p>
-              <p class="cert"><b>IBM Cloud Fundamentals (V2)</b><span>Sept 2024 · virtualization, distributed systems, cloud service models</span></p>
-            </div>
-          </div>
-          <div class="sub">
-            <h3>Languages</h3>
-            <p>English, Marathi, Hindi, German</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec" id="contact">
-      <h2>Contact</h2>
-      <div class="body">
-        <p>Open to internship conversations in AI and software engineering. Email is the quickest way to reach me.</p>
-        <div class="links" style="margin-top:0">
-          <span class="email-text" id="email">siddhigawali518@gmail.com</span>
-          <button class="copy" id="copy" type="button">Copy email</button>
-          <span class="email-text">+91 9730304249</span>
-        </div>
-        <div class="links" style="margin-top:0">
-          <a href="https://www.linkedin.com/in/siddhi-gawali-38557b2b2/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/SIDDHIGAWALI" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.kaggle.com/siddhigawali" target="_blank" rel="noopener">Kaggle</a>
-        </div>
-      </div>
-    </section>
+    <h2>What I work with</h2>
+    <div class="skills">
+      <div class="group"><h3>Languages</h3><ul class="chips"><li>Python</li><li>SQL</li><li>Java</li><li>JavaScript</li><li>Bash</li></ul></div>
+      <div class="group"><h3>Machine learning</h3><ul class="chips"><li>Scikit-learn</li><li>Random Forest</li><li>Extra Trees</li><li>Clustering</li><li>PCA</li><li>Feature analysis</li></ul></div>
+      <div class="group"><h3>Deep learning</h3><ul class="chips"><li>PyTorch</li><li>TensorFlow</li><li>Keras</li><li>CNN</li><li>RNN</li><li>LSTM</li><li>GNN</li><li>ViT</li><li>Transformers</li></ul></div>
+      <div class="group"><h3>Generative AI</h3><ul class="chips"><li>LLMs</li><li>RAG</li><li>FAISS</li><li>Embeddings</li><li>LoRA / QLoRA</li><li>Prompt design</li></ul></div>
+      <div class="group"><h3>Computer vision</h3><ul class="chips"><li>OpenCV</li><li>YOLO</li><li>Object detection</li><li>Gesture recognition</li><li>Hyperspectral imaging</li></ul></div>
+      <div class="group"><h3>Data and dashboards</h3><ul class="chips"><li>Pandas</li><li>NumPy</li><li>Matplotlib</li><li>Seaborn</li><li>Power BI</li><li>Tableau</li><li>SPSS</li><li>Cognos</li></ul></div>
+      <div class="group"><h3>Cloud and DevOps</h3><ul class="chips"><li>Docker</li><li>Kubernetes</li><li>Jenkins</li><li>CI/CD</li><li>IBM Cloud</li><li>Databricks</li><li>Spark (basics)</li></ul></div>
+      <div class="group"><h3>Everyday tools</h3><ul class="chips"><li>Git &amp; GitHub</li><li>Linux</li><li>MySQL</li><li>MongoDB</li><li>Jira</li><li>Scrum</li><li>Kanban</li></ul></div>
+    </div>
   </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Things I've built</h2>
+
+    <div class="feature">
+      <div>
+        <span class="badge">1st place, LLM competition 2026</span>
+        <h3>EduVerse-1: a university assistant</h3>
+        <p>As team co-lead, I helped build a chatbot for Sanjivani University that answers questions on admissions, fees and exam rules, and tells you where each answer came from.</p>
+        <p style="margin-top:16px"><a href="#" style="font-weight:700">View on GitHub</a></p>
+      </div>
+      <ul>
+        <li>Wrote and trained a small Transformer from scratch (about 23M parameters) with its own tokenizer.</li>
+        <li>Added a retrieval layer so answers are grounded in real syllabi, policies and web pages.</li>
+        <li>Cleaned noisy scraped data and tracked overfitting across training checkpoints.</li>
+      </ul>
+    </div>
+
+    <div class="projects">
+      <article class="card">
+        <h3>Smart crop stage prediction</h3>
+        <div class="tag">Published at IEEE ICSCSA 2025</div>
+        <p>Predicts a crop's growth stage from soil and weather readings, and shows which factors, like rainfall and humidity, matter most. Accuracy and AUC both passed 99%.</p>
+        <div class="stack">Python, Scikit-learn, Pandas, NumPy</div>
+        <a class="link" href="#">GitHub</a>
+      </article>
+      <article class="card">
+        <h3>Early bladder cancer screening</h3>
+        <div class="tag">Hyperspectral imaging with transfer learning</div>
+        <p>A diagnostic pipeline that compresses hyperspectral scans with PCA, balances the classes through augmentation, and classifies them with a fine-tuned ResNet50.</p>
+        <div class="stack">Python, ResNet50, PCA</div>
+        <a class="link" href="#">GitHub</a>
+      </article>
+      <article class="card">
+        <h3>Real-time sign language translator</h3>
+        <div class="tag">Computer vision and deep learning</div>
+        <p>Reads hand gestures from a live camera and turns them into text. It blends CNNs for appearance, graph networks for hand joints and Vision Transformers for the overall motion.</p>
+        <div class="stack">CNN, GNN, ViT, OpenCV</div>
+        <a class="link" href="#">GitHub</a>
+      </article>
+      <article class="card">
+        <h3>Handicrafts Q&amp;A model</h3>
+        <div class="tag">Internship project</div>
+        <p>Scraped craft content, generated question and answer pairs, and fine-tuned Qwen2.5 with LoRA. I also traced and fixed made-up links in its answers.</p>
+        <div class="stack">Qwen2.5, LoRA, SFT</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="wrap cols">
+    <div>
+      <h2>Experience</h2>
+      <div class="tl">
+        <article>
+          <h3>Trainee, Tech Mahindra Maker's Lab</h3>
+          <div class="when">June to October 2026</div>
+          <ul>
+            <li>Explored large language and vision-language models, including domain-specific and Qwen models.</li>
+            <li>Fine-tuned models with LoRA and QLoRA.</li>
+            <li>Put an ML model inside a mobile app, compared tree-based models, and tested live client apps to catch bugs.</li>
+          </ul>
+        </article>
+      </div>
+      <h2 style="margin-top:48px">Certifications</h2>
+      <div class="tl">
+        <article><h3>Learning Analytical Tools</h3><div class="when">October 2025</div></article>
+        <article><h3>IBM DevOps Fundamentals</h3><div class="when">November 2024</div></article>
+        <article><h3>IBM Cloud Fundamentals v2</h3><div class="when">September 2024</div></article>
+      </div>
+    </div>
+    <div>
+      <h2>Education</h2>
+      <div class="tl">
+        <article><h3>B.Tech, AI &amp; Data Science</h3><div class="when">Sanjivani University, 2024 to 2027</div><p>CGPA 8.32 so far.</p></article>
+        <article><h3>Diploma, Computer Technology</h3><div class="when">Sanjivani K.B.P. Polytechnic, 2022 to 2024</div><p>87.89%</p></article>
+        <article><h3>HSC, Science</h3><div class="when">Sanjivani Junior College, 2020 to 2022</div><p>79.67%</p></article>
+        <article><h3>SSC, CBSE</h3><div class="when">Samata International School, 2014 to 2020</div><p>82.2%</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wins">
+  <div class="wrap">
+    <h2>Wins and community</h2>
+    <ul class="wins">
+      <li><strong>First place</strong><span>Inter-departmental LLM competition at Sanjivani University, 2026.</span></li>
+      <li><strong>Published author</strong><span>Paper on crop growth stage classification, IEEE ICSCSA 2025.</span></li>
+      <li><strong>President</strong><span>AI &amp; DS Student Association.</span></li>
+      <li><strong>Team member</strong><span>Google Developer Students Club events.</span></li>
+      <li><strong>Member</strong><span>IEEE Student Branch.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:24px">
+  <div class="wrap">
+    <div class="contact">
+      <h2>Let's build something</h2>
+      <p>I'm open to AI and software engineering internships. Send me a note and I'll reply soon.</p>
+      <a class="btn main" href="mailto:siddhigawali518@gmail.com">Email me</a>
+      <a class="btn" href="#">LinkedIn</a>
+      <a class="btn" href="#">GitHub</a>
+      <a class="btn" href="#">Kaggle</a>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>Siddhi Gawali · Kopargaon, India</span>
-    <a href="#top">Back to top ↑</a>
-  </div>
-</footer>
-
-<script>
-(function () {
-  var btn = document.getElementById('copy');
-  var el = document.getElementById('email');
-  function selectText() {
-    try {
-      var r = document.createRange(); r.selectNodeContents(el);
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-    } catch (e) {}
-  }
-  btn.addEventListener('click', function () {
-    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy email'; }, 1800); };
-    try {
-      navigator.clipboard.writeText(el.textContent.trim()).then(done, function () { selectText(); btn.textContent = 'Press Ctrl/Cmd+C'; });
-    } catch (e) { selectText(); btn.textContent = 'Press Ctrl/Cmd+C'; }
-  });
-})();
-</script>
+<footer>© 2026 Siddhi Gawali</footer>
 </body>
 </html>
